@@ -1,7 +1,7 @@
 #ifndef ARITHMETIC_TOKENIZE_H
 #define ARITHMETIC_TOKENIZE_H
 
-#include "implementation.h"
+#include "implementation_stack.h"
 
 Token Tokenize(const char *str)
 {

@@ -2,7 +2,7 @@
 #ifndef ARITHMETIC_CALCULATE_H
 #define ARITHMETIC_CALCULATE_H
 
-#include "implementation.h"
+#include "implementation_stack.h"
 #include "tokenize.h"
 
 /**

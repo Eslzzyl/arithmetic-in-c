@@ -1,9 +1,9 @@
 /**
- * 本文件实现项目中的各种函数。
+ * 本文件实现堆栈ADT中的各种操作函数。
  */
 
-#ifndef ARITHMETIC_IMPLEMENTATION_H
-#define ARITHMETIC_IMPLEMENTATION_H
+#ifndef ARITHMETIC_IMPLEMENTATION_STACK_H
+#define ARITHMETIC_IMPLEMENTATION_STACK_H
 
 #define STRING_LENGTH 100
 
@@ -40,7 +40,7 @@ struct Node
 
 double Calculate(char *);               //实现见calculate.h
 char *DeleteSpace_Tab(char *);
-char *ReadFile(char *, enum readmode);
+char *GetFormula(char *, enum readmode);
 Token Tokenize(const char *);
 void FatalError(const char *);
 
@@ -173,7 +173,7 @@ char *DeleteSpace_Tab(char *str)
  * @param FILE *fp
  * @return char *formula
  */
-char *ReadFile(char *filesource, enum readmode mode)
+char *GetFormula(char *filesource, enum readmode mode)
 {
     static FILE *fp = NULL;
     static char string[STRING_LENGTH];
@@ -204,4 +204,4 @@ char *ReadFile(char *filesource, enum readmode mode)
     return string;
 }
 
-#endif //ARITHMETIC_IMPLEMENTATION_H
+#endif //ARITHMETIC_IMPLEMENTATION_STACK_H
