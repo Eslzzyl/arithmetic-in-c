@@ -3,4 +3,4 @@ project(arithmetic C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(arithmetic main.c stack.h implementation_stack.h calculate.h tokenize.h)
+add_executable(arithmetic main.c stack.h implementation_stack.h calculate.h tokenize.h implementation.h queue.h implementation_queue.h)

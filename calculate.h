@@ -3,6 +3,8 @@
 #define ARITHMETIC_CALCULATE_H
 
 #include "implementation_stack.h"
+#include "implementation_queue.h"
+#include "implementation.h"
 #include "tokenize.h"
 
 /**

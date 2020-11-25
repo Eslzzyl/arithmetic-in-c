@@ -2,7 +2,6 @@
  * 堆栈ADT声明文件。
  */
 
-//头文件防重入功能
 #ifndef ARITHMETIC_STACK_H
 #define ARITHMETIC_STACK_H
 

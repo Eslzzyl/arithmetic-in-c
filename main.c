@@ -6,7 +6,7 @@
  * Data Structures and Algorithm Analysis in C 2nd Edition by Mark Allen Weiss
  */
 
-#include "implementation_stack.h"
+#include "implementation.h"
 #include "calculate.h"
 
 int main(int argc, char *argv[])
