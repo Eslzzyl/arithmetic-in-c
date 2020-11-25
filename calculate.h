@@ -1,3 +1,6 @@
+/**
+ * 本文件实现Calculate()函数。
+ */
 
 #ifndef ARITHMETIC_CALCULATE_H
 #define ARITHMETIC_CALCULATE_H

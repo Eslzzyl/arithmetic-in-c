@@ -1,5 +1,5 @@
 /**
- * 本文件实现堆栈ADT中的各种操作函数。
+ * 本文件实现队列ADT中的各种操作函数。
  */
 
 #ifndef ARITHMETIC_IMPLEMENTATION_QUEUE_H

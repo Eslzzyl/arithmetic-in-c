@@ -1,3 +1,8 @@
+/**
+ * 本文件实现Tokenize()函数。
+ * 本函数用来从字符串中分割出操作符和操作数。
+ */
+
 #ifndef ARITHMETIC_TOKENIZE_H
 #define ARITHMETIC_TOKENIZE_H
 

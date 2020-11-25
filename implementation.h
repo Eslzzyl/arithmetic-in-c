@@ -1,5 +1,5 @@
 /**
- * 一些小型的实现函数。
+ * 本文件实现一些小型的工具函数。
  */
 
 #ifndef ARITHMETIC_IMPLEMENTATION_H
