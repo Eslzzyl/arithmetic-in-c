@@ -21,15 +21,15 @@ double Calculate(char *str)
     Token token;
     str = DeleteSpace_Tab(str);
 
-    token = Tokenize(str);
     while (1)
     {
+        token = Tokenize(str);
         if (token.isvalid == 0){
             result = 0.0;
             break;
         }
 
-        token = Tokenize(NULL);
+        Tokenize(NULL);
     }
     return result;
 }
