@@ -6,7 +6,7 @@
 #define ARITHMETIC_IMPLEMENTATION_STACK_H
 
 #include "implementation.h"
-#include "stack.h"
+#include "declaration.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +14,7 @@
 /**
  * 堆栈的节点
  */
-struct Node
+struct node
 {
     char Element;
     PtrToNode Next;
@@ -38,7 +38,7 @@ Stack CreateStack(void)
 {
     Stack S;
 
-    S = malloc(sizeof(struct Node));
+    S = malloc(sizeof(struct node));
     if (S == NULL)
         FatalError("Out of Space!");
     S -> Next = NULL;
@@ -67,7 +67,7 @@ void Push(char X, Stack S)
 {
     PtrToNode TmpCell;
 
-    TmpCell = malloc(sizeof(struct Node));
+    TmpCell = malloc(sizeof(struct node));
     if (TmpCell == NULL)
         FatalError("Out of space!!!");
     else

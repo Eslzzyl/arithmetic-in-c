@@ -5,7 +5,7 @@
 #ifndef ARITHMETIC_IMPLEMENTATION_QUEUE_H
 #define ARITHMETIC_IMPLEMENTATION_QUEUE_H
 
-#include "queue.h"
+#include "declaration.h"
 
 
 #endif //ARITHMETIC_IMPLEMENTATION_QUEUE_H

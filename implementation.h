@@ -10,9 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef enum datatype DataType;
-typedef struct token Token;
+#include "declaration.h"
 
 enum datatype{
     ADD, MINUS, MULTIPLY, DIVIDE, LEFT_PARENTHESES, RIGHT_PARENTHESES,
@@ -27,10 +25,6 @@ struct token
     double data;
     _Bool isvalid;
 };
-
-void FatalError(const char *);
-char *DeleteSpace_Tab(char *);
-char *GetFormula(char *, enum readmode);
 
 /**
  * 报错函数。将传入的错误信息打印至屏幕，然后终止程序。
@@ -89,8 +83,8 @@ char *GetFormula(char *filesource, enum readmode mode)
             if (fp == NULL)
                 FatalError("Couldn't find file!\n");
         }
-        char *isendoffile = fgets(string, STRING_LENGTH, fp);
-        if (isendoffile == NULL)
+        char *iseof = fgets(string, STRING_LENGTH, fp);
+        if (iseof == NULL)
             return NULL;
     }
     else if (mode == CLOSE)

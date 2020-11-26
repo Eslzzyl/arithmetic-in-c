@@ -11,8 +11,7 @@
 
 int main(int argc, char *argv[])
 {
-    char string[STRING_LENGTH] = {'\0'};
-    char *p = string;
+    char *p;
     char *filesource = NULL;
     double result;
 
@@ -25,7 +24,7 @@ int main(int argc, char *argv[])
         result = Calculate(p);
         printf("The result is %lf\n\n", result);
     }
-    GetFormula(string, CLOSE);                      //传入CLOSE枚举参数，关闭GetFormula()中打开的文件
+    GetFormula(p, CLOSE);                      //传入CLOSE枚举参数，关闭GetFormula()中打开的文件
 
     return 0;
 }
