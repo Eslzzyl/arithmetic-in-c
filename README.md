@@ -10,8 +10,10 @@
 
 程序整体使用C99标准下的C语言
 
-IDE使用CLion 2020.2 on Windows<br>
-编译器为GCC 8.1.0<br>
+IDE使用CLion 2020.2 on Windows
+
+编译器为GCC 8.1.0
+
 后期可能会在Ubuntu上测试程序
 
 ~~GitHub识别有问题，会把所有的头文件识别成C++，其实都是C~~

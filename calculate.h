@@ -5,8 +5,7 @@
 #ifndef ARITHMETIC_CALCULATE_H
 #define ARITHMETIC_CALCULATE_H
 
-#include "implementation_stack.h"
-#include "implementation_queue.h"
+#include "implementation_adt.h"
 #include "implementation.h"
 #include "tokenize.h"
 
@@ -21,6 +20,7 @@ double Calculate(char *str)
     Token token;
     str = DeleteSpace_Tab(str);
 
+    Stack stack1 = CreateStack();
     while (1)
     {
         token = Tokenize(str);
