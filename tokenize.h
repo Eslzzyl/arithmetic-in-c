@@ -14,10 +14,16 @@ Token Tokenize(const char *str)
     token.isvalid = 1;          //默认传入的token是合法的
     static char *p;
 
-    if (str != NULL)            //如果传入的字符串不为NULL，则将其赋给p
+    if (str != NULL && p == NULL)            //如果传入的字符串不为NULL且p为NULL，表示这是一个新的字符串，将其赋给p
         p = (char *)str;
+    else if (str == NULL && p != NULL)                    //如果传入NULL，表示分解完毕，将p设为NULL等待下一次分解
+        p = NULL;
 
-    if (*p == '+'){                             //相加
+    if (*p == '\0'){
+        token.mode = END;
+        return token;
+    }
+    else if (*p == '+'){                             //相加
         p++;
         token.mode = ADD;
     }
@@ -58,6 +64,7 @@ Token Tokenize(const char *str)
         }
         *(++q) = '\0';                              //将q的下一个字符设为\0，标记q的结束
         token.data = strtod(q, NULL);               //使用库函数strtod()将字符串转换成double
+        token.mode = DOUBLE;
     }
     else{                                           //若前面几种情况均未匹配到，视为未定义的表达式，报错
         printf("Error: invalid formula:\n");

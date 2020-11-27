@@ -12,13 +12,23 @@
 #include <string.h>
 
 /**
- * 堆栈的节点
+ * 枚举堆栈的节点
  */
 struct stack_node
 {
-    char Element;
+    DataType Element;
     PtrToStackNode Next;
 };
+
+/**
+ * double堆栈的节点
+ */
+struct stack_double_node
+{
+    double Element;
+    PtrToStackDoubleNode Next;
+};
+
 /**
  * 队列的节点
  */
@@ -59,10 +69,10 @@ void MakeStackEmpty(Stack S)
 
 /**
  * 将一个值(X)压入栈中
- * @param char X
+ * @param DataType X
  * @param Stack S
  */
-void Push(char X, Stack S)
+void Push(DataType X, Stack S)
 {
     PtrToStackNode TmpCell;
 
@@ -80,9 +90,9 @@ void Push(char X, Stack S)
 /**
  * 返回栈顶元素
  * @param Stack S
- * @return char top
+ * @return DataType top
  */
-char Top(Stack S)
+DataType Top(Stack S)
 {
     if (!IsStackEmpty(S))
         return S -> Next -> Element;
@@ -113,11 +123,67 @@ void Pop(Stack S)
  * @param Stack S
  * @return 如果为空，返回1；如果不为空，返回0。
  */
-int IsStackEmpty(Stack S)
+_Bool IsStackEmpty(Stack S)
 {
     return S -> Next == NULL;
 }
 
+DoubleStack CreateDoubleStack(void)
+{
+    DoubleStack DS;
+
+    DS = malloc(sizeof(struct stack_double_node));
+    if (DS == NULL)
+        FatalError("Out of space!");
+    DS -> Next = NULL;
+    MakeDoubleStackEmpty(DS);
+    return DS;
+}
+
+void MakeDoubleStackEmpty(DoubleStack DS)
+{
+    if (DS == NULL)
+        FatalError("Must use CreateDoubleStack() first!");
+    else
+        while (!IsDoubleStackEmpty(DS))
+            PopDoubleStack(DS);
+}
+
+void PushDoubleStack(double X, DoubleStack DS)
+{
+    PtrToStackDoubleNode TmpCell;
+    TmpCell = malloc(sizeof(struct stack_double_node));
+    if (TmpCell == NULL)
+        FatalError("Out of space!");
+    else
+    {
+        TmpCell->Element = X;
+        TmpCell->Next = DS->Next;
+        DS->Next = TmpCell;
+    }
+}
+
+double PopDoubleStack(DoubleStack DS)
+{
+    PtrToStackDoubleNode FirstCell;
+    double X;
+
+    if (IsDoubleStackEmpty(DS))
+        FatalError("Empty Stack!");
+    else
+    {
+        X = DS -> Next -> Element;
+        FirstCell = DS -> Next;
+        DS -> Next = DS -> Next -> Next;
+        free(FirstCell);
+    }
+    return X;
+}
+
+_Bool IsDoubleStackEmpty(DoubleStack DS)
+{
+    return DS -> Next == NULL;
+}
 
 /**
  * 创建一个队列
@@ -186,7 +252,7 @@ double Dequeue(Queue Q)
  * @param Queue S
  * @return 如果为空，返回1；如果不为空，返回0。
  */
-int IsQueueEmpty(Queue Q)
+_Bool IsQueueEmpty(Queue Q)
 {
     return Q -> Next == NULL;
 }

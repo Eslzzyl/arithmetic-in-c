@@ -13,7 +13,7 @@
 #include "declaration.h"
 
 enum datatype{                          //Tokenize()返回的结构体中包含的枚举，标记操作模式
-    ADD, MINUS, MULTIPLY, DIVIDE, LEFT_PARENTHESES, RIGHT_PARENTHESES,
+    ADD, MINUS, MULTIPLY, DIVIDE, LEFT_PARENTHESES, RIGHT_PARENTHESES, DOUBLE, END,
 };
 enum read_mode{                          //GetFormula()的操作模式，也许可以精简？
     READ, CLOSE,

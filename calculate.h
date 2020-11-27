@@ -5,9 +5,7 @@
 #ifndef ARITHMETIC_CALCULATE_H
 #define ARITHMETIC_CALCULATE_H
 
-#include "implementation_adt.h"
-#include "implementation.h"
-#include "tokenize.h"
+#include "infix_to_postfix.h"
 
 /**
  * 执行计算过程的核心函数
@@ -16,21 +14,40 @@
  */
 double Calculate(char *str)
 {
-    double result;
-    Token token;
+    double a, b;
     str = DeleteSpace_Tab(str);
 
-    Stack stack1 = CreateStack();
-    while (1)
-    {
-        token = Tokenize(str);
-        if (token.isvalid == 0){
-            result = 0.0;
-            break;
-        }
+    Stack s1 = CreateStack();
+    DoubleStack s2 = CreateDoubleStack();
+    Queue q = CreateQueue();
+    if (InfixToPostfix(s1, q, str) == 0)         //isValid为false，返回0.0
+        return 0.0;
 
-        Tokenize(NULL);
+    while (!IsStackEmpty(s1 -> Next))
+    {
+        if (Top(s1) == DOUBLE)
+            PushDoubleStack(Dequeue(q), s2);
+        else if (Top(s1) == ADD){
+            a = PopDoubleStack(s2);
+            b = PopDoubleStack(s2);
+            PushDoubleStack(a + b, s2);
+        }
+        else if (Top(s1) == MINUS){
+            a = PopDoubleStack(s2);
+            b = PopDoubleStack(s2);
+            PushDoubleStack(a - b, s2);
+        }
+        else if (Top(s1) == MULTIPLY){
+            a = PopDoubleStack(s2);
+            b = PopDoubleStack(s2);
+            PushDoubleStack(a * b, s2);
+        }
+        else if (Top(s1) == DIVIDE){
+            a = PopDoubleStack(s2);
+            b = PopDoubleStack(s2);
+            PushDoubleStack(a / b, s2);
+        }
     }
-    return result;
+    return PopDoubleStack(s2);
 }
 #endif //ARITHMETIC_CALCULATE_H

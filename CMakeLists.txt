@@ -3,4 +3,4 @@ project(arithmetic C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(arithmetic main.c declaration.h implementation_adt.h calculate.h tokenize.h implementation.h declaration.h)
+add_executable(arithmetic main.c declaration.h implementation_adt.h calculate.h tokenize.h implementation.h declaration.h infix_to_postfix.h)
