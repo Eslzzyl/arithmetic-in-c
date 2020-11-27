@@ -15,7 +15,7 @@
 enum datatype{                          //Tokenize()返回的结构体中包含的枚举，标记操作模式
     ADD, MINUS, MULTIPLY, DIVIDE, LEFT_PARENTHESES, RIGHT_PARENTHESES,
 };
-enum readmode{                          //GetFormula()的操作模式，也许可以精简？
+enum read_mode{                          //GetFormula()的操作模式，也许可以精简？
     READ, CLOSE,
 };
 
@@ -63,12 +63,12 @@ char *DeleteSpace_Tab(char *str)
  * @param FILE *fp
  * @return char *formula
  */
-char *GetFormula(char *filesource, enum readmode mode)
+char *GetFormula(char *fileSource, enum read_mode mode)
 {
     static FILE *fp = NULL;                         //两个变量定义成static，使其在多次调用中保持值。
     static char string[STRING_LENGTH];
 
-    if (filesource == NULL)                         //传入文件路径为NULL，则从控制台获取算式
+    if (fileSource == NULL)                         //传入文件路径为NULL，则从控制台获取算式
     {
         printf("Input the formula you want to calculate, input \"exit\" to exit the program.\n");
         gets(string);
@@ -79,7 +79,7 @@ char *GetFormula(char *filesource, enum readmode mode)
     {
         if (fp == NULL)                             //如果之前没有打开过文件，则执行打开操作
         {
-            fp = fopen(filesource, "r");     //使用读模式打开文件
+            fp = fopen(fileSource, "r");     //使用读模式打开文件
             if (fp == NULL)
                 FatalError("Couldn't find file!\n");
         }

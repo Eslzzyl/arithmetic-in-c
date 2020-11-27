@@ -43,10 +43,10 @@ Token Tokenize(const char *str)
     }
     else if ((*p >= '0' && *p <= '9') || *p == '.'){  //数字的情况，兼容小数点
         char *q = p;
-        _Bool ispointoccured = 0;                   //标记小数点在这个token里是否已经出现
+        _Bool isPointOccured = 0;                   //标记小数点在这个token里是否已经出现
         while ((*p >= '0' && *p <= '9') || *p == '.'){
-            if (*p == '.' && ispointoccured == 0)   //如果小数点未出现，改变标记
-                ispointoccured = 1;
+            if (*p == '.' && isPointOccured == 0)   //如果小数点未出现，改变标记
+                isPointOccured = 1;
             else{                                   //如果小数点再次出现，报错
                 printf("Error: invalid formula:\n");
                 puts(p);
