@@ -26,7 +26,7 @@ typedef struct token Token;
 void FatalError(const char *);
 char *DeleteSpace_Tab(char *);
 char *GetFormula(char *, enum read_mode);
-Token Tokenize(const char *);
+Token Tokenize(volatile const char *);
 _Bool InfixToPostfix(Stack, Queue, const char *);
 double Calculate(char *);
 

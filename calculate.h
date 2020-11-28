@@ -23,7 +23,7 @@ double Calculate(char *str)
     if (InfixToPostfix(s1, q, str) == 0)         //isValid为false，返回0.0
         return 0.0;
 
-    while (!IsStackEmpty(s1 -> Next))
+    while (!IsStackEmpty(s1))
     {
         if (Top(s1) == DOUBLE)
             PushDoubleStack(Dequeue(q), s2);
@@ -47,6 +47,7 @@ double Calculate(char *str)
             b = PopDoubleStack(s2);
             PushDoubleStack(a / b, s2);
         }
+        Pop(s1);
     }
     return PopDoubleStack(s2);
 }

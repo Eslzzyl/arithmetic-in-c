@@ -227,7 +227,7 @@ void Enqueue(double X, Queue Q)
     else
     {
         TmpCell -> Element = X;
-        TmpCell -> Next = Q -> Next;            //在栈顶压入X，注意栈顶在栈的头部
+        TmpCell -> Next = Q -> Next;
         Q -> Next = TmpCell;
     }
 }
