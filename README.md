@@ -24,6 +24,9 @@ IDE使用CLion 2020.2 on Windows
 
 2020-11-28 发现这玩意可以用表达式树(expression tree)来实现，更美。~~但是暂时没有勇气改算法~~
 
+2020-11-28晚些时候 调试工作正在进行，这个版本下的tokenize.h的第63行会出现Segmentation Fault，原因暂时不明。
+非常棘手，明天再试试吧。
+
 ## 实现思路
 
 本项目首先将输入的中缀表达式(infix)转换成逆波兰(reverse Polish)

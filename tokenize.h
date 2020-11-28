@@ -13,7 +13,7 @@ Token Tokenize(volatile const char *str)
     Token token;                //Token结构体，定义见implementation.h
     token.isvalid = 1;          //默认传入的token是合法的
     static char *p;
-    volatile char *q, *k = q;
+    char *q = NULL, *k = NULL;
 
     if (str != NULL && p == NULL)            //如果传入的字符串不为NULL且p为NULL，表示这是一个新的字符串，将其赋给p
         p = (char *)str;
