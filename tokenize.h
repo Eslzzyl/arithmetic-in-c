@@ -13,7 +13,6 @@ Token Tokenize(volatile const char *str)
     Token token;                //Token结构体，定义见implementation.h
     token.isvalid = 1;          //默认传入的token是合法的
     static char *p;
-    char *q = NULL, *k = NULL;
 
     if (str != NULL && p == NULL)            //如果传入的字符串不为NULL且p为NULL，表示这是一个新的字符串，将其赋给p
         p = (char *)str;
@@ -51,6 +50,8 @@ Token Tokenize(volatile const char *str)
         token.mode = RIGHT_PARENTHESES;
     }
     else if ((*p >= '0' && *p <= '9') || *p == '.'){  //数字的情况，兼容小数点
+        char q[STRING_LENGTH], k[STRING_LENGTH];
+        int i = 0;
         _Bool isPointOccured = 0;                   //标记小数点在这个token里是否已经出现
         while ((*p >= '0' && *p <= '9') || *p == '.'){
             if (*p == '.' && isPointOccured == 0)   //如果小数点未出现，改变标记
@@ -60,12 +61,12 @@ Token Tokenize(volatile const char *str)
                 puts(p);
                 token.isvalid = 0;                  //token不合法
             }
-            *q = *p;                                //将p中的字段分离出来，放到q
+            q[i] = *p;                                //将p中的字段分离出来，放到q
             p++;
-            q++;
+            i++;
         }
-        *q = '\0';                              //将q的下一个字符设为\0，标记q的结束
-        token.data = strtod((char *)k, NULL);               //使用库函数strtod()将字符串转换成double
+        q[i] = '\0';                              //将q的下一个字符设为\0，标记q的结束
+        token.data = strtod((char *)q, NULL);               //使用库函数strtod()将字符串转换成double
         token.mode = DOUBLE;
     }
     else{                                           //若前面几种情况均未匹配到，视为未定义的表达式，报错

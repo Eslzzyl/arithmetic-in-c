@@ -26,7 +26,6 @@ _Bool InfixToPostfix(Stack s1, Queue q, const char *string)
                 isValid = 0;
                 return isValid;
             }
-            Push(END, s2);
             break;
         }
         Push(token.mode, s2);
