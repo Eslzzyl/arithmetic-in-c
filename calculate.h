@@ -35,7 +35,7 @@ double Calculate(char *str)
         else if (TailOfQueue(q) == MINUS){
             a = PopDoubleStack(s);
             b = PopDoubleStack(s);
-            PushDoubleStack(a - b, s);
+            PushDoubleStack(b - a, s);
         }
         else if (TailOfQueue(q) == MULTIPLY){
             a = PopDoubleStack(s);
@@ -45,7 +45,7 @@ double Calculate(char *str)
         else if (TailOfQueue(q) == DIVIDE){
             a = PopDoubleStack(s);
             b = PopDoubleStack(s);
-            PushDoubleStack(a / b, s);
+            PushDoubleStack(b / a, s);
         }
         Dequeue(q);
     }

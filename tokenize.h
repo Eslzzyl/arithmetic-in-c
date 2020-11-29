@@ -8,7 +8,7 @@
 
 #include "implementation.h"
 
-Token Tokenize(volatile const char *str)
+Token Tokenize(const char *str)
 {
     Token token;                //Token结构体，定义见implementation.h
     token.isvalid = 1;          //默认传入的token是合法的

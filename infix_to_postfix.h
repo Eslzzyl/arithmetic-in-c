@@ -10,7 +10,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
 {
     Token token;
     Stack s2 = CreateStack();
-    Queue q2 = CreateQueue();
+    Queue q2 = CreateQueue();           //实现中缀式到后缀式变换的队列
     _Bool isValid = 1;
     DataType operator;
 
@@ -35,7 +35,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
     }
     Tokenize(NULL);
 
-    for (;;)                              //将中缀式转换成后缀式
+    for (;;)                              //第二轮循环，将中缀式转换成后缀式
     {
         if (IsQueueEmpty(q2))
             break;
@@ -43,25 +43,47 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
         Dequeue(q2);
         if (operator == DOUBLE)
             Enqueue(DOUBLE, q1);
-        else if (operator == ADD)
-            Push(ADD, s2);
-        else if (operator == MINUS)
-            Push(MINUS, s2);
+        else if (operator == ADD){
+            if(IsStackEmpty(s2)){
+                Push(ADD, s2);
+            } else if (Top(s2) != LEFT_PARENTHESES){
+                Enqueue(Top(s2), q1);
+                Push(ADD, s2);
+            }
+        }
+        else if (operator == MINUS){
+            if(IsStackEmpty(s2)){
+                Push(MINUS, s2);
+            } else if (Top(s2) != LEFT_PARENTHESES){
+                Enqueue(Top(s2), q1);
+                Push(MINUS, s2);
+            }
+        }
         else if (operator == LEFT_PARENTHESES)
             Push(LEFT_PARENTHESES, s2);
         else if (operator == MULTIPLY){
-            while (Top(s2) != ADD && Top(s2) != MINUS){
-                Enqueue(Top(s2), q1);
-                Pop(s2);
+            if (IsStackEmpty(s2) || Top(s2) == ADD || Top(s2) == MINUS || Top(s2) == LEFT_PARENTHESES)
+                Push(MULTIPLY, s2);
+            else{
+                while (!IsStackEmpty(s2) && (Top(s2) != ADD && Top(s2) != MINUS && Top(s2) != LEFT_PARENTHESES))
+                {
+                    Enqueue(Top(s2), q1);
+                    Pop(s2);
+                }
+                Push(MULTIPLY, s2);
             }
-            Enqueue(MULTIPLY, q1);
         }
         else if (operator == DIVIDE){
-            while (Top(s2) != ADD && Top(s2) != MINUS){
-                Enqueue(Top(s2), q1);
-                Pop(s2);
+            if (IsStackEmpty(s2) || Top(s2) == ADD || Top(s2) == MINUS || Top(s2) == LEFT_PARENTHESES)
+                Push(DIVIDE, s2);
+            else{
+                while (!IsStackEmpty(s2) && (Top(s2) != ADD && Top(s2) != MINUS && Top(s2) != LEFT_PARENTHESES))
+                {
+                    Enqueue(Top(s2), q1);
+                    Pop(s2);
+                }
+                Push(DIVIDE, s2);
             }
-            Enqueue(DIVIDE, q1);
         }
         else if (operator == RIGHT_PARENTHESES){
             while (Top(s2) != LEFT_PARENTHESES){
