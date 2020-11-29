@@ -29,7 +29,7 @@ typedef struct token Token;
 void FatalError(const char *);
 char *DeleteSpace_Tab(char *);
 char *GetFormula(char *, enum read_mode);
-Token Tokenize(volatile const char *);
+Token Tokenize(const char *);
 _Bool InfixToPostfix(Queue, Doublequeue, const char *);
 double Calculate(char *);
 
