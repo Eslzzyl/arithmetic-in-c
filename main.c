@@ -19,12 +19,12 @@ int main(int argc, char *argv[])                    //接收命令行参数
         fileSource = argv[1];
     else if (argc > 2)                              //若有不止一个参数，报错
         FatalError("Invalid arguments!\n");
-    while ((p = GetFormula(fileSource, READ)) != NULL)  //只要GetFormula()返回的字符串不为NULL，就持续循环
+    while ((p = GetFormula(fileSource, argc, READ)) != NULL)  //只要GetFormula()返回的字符串不为NULL，就持续循环
     {
         result = Calculate(p);
         printf("The result is %lf\n\n", result);
     }
-    GetFormula(p, CLOSE);                      //传入CLOSE枚举参数，关闭GetFormula()中打开的文件
+    GetFormula(p, argc, CLOSE);                      //传入CLOSE枚举参数，关闭GetFormula()中打开的文件
 
     return 0;
 }

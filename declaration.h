@@ -28,7 +28,7 @@ typedef struct token Token;
 //功能性函数声明
 void FatalError(const char *);
 char *DeleteSpace_Tab(char *);
-char *GetFormula(char *, enum read_mode);
+char *GetFormula(char *, int, enum read_mode);
 Token Tokenize(const char *);
 _Bool InfixToPostfix(Queue, Doublequeue, const char *);
 double Calculate(char *);

@@ -32,7 +32,8 @@ struct token                            //Tokenize()返回的结构体
  */
 void FatalError(const char *str)
 {
-    puts(str);
+    char string[STRING_LENGTH] = "Fatal error: ";
+    puts(strcat(string, str));
     exit(1);                        //直接结束程序
 }
 /**
@@ -46,7 +47,7 @@ char *DeleteSpace_Tab(char *str)
 
     while (*p != '\0')                  //只要字符串不结束，就持续循环
     {
-        if (*p != ' ' && *p != 9)       //9: Tab键的ASCII码值
+        if (*p != ' ' && *p != 9 && *p != '\n')       //9: Tab键的ASCII码值
         {
             *q = *p;
             q++;
@@ -63,7 +64,7 @@ char *DeleteSpace_Tab(char *str)
  * @param FILE *fp
  * @return char *formula
  */
-char *GetFormula(char *fileSource, enum read_mode mode)
+char *GetFormula(char *fileSource, int argc, enum read_mode mode)
 {
     static FILE *fp = NULL;                         //两个变量定义成static，使其在多次调用中保持值。
     static char string[STRING_LENGTH];
@@ -72,7 +73,7 @@ char *GetFormula(char *fileSource, enum read_mode mode)
     {
         printf("Input the formula you want to calculate, input \"exit\" to exit the program.\n");
         gets(string);
-        if (strcmp(string, "exit") == 0)            //输入exit则直接退出
+        if (string[0] == 'e' && strcmp(string, "exit") == 0) //输入exit则直接退出，采用这样的写法是为了加快非exit情况下的检测速度
             exit(0);
     }
     else if (mode == READ)
@@ -85,7 +86,12 @@ char *GetFormula(char *fileSource, enum read_mode mode)
         }
         char *iseof = fgets(string, STRING_LENGTH, fp); //从文件读入算式。如果遇到文件尾，fgets()返回NULL，用变量iseof接收。
         if (iseof == NULL)
+        {
+            if (argc == 2)
+                exit(0);
             return NULL;
+        }
+        printf("Read\n\t%sfrom file %s.\n", string, fileSource);
     }
     else if (mode == CLOSE)                         //关闭文件
         fclose(fp);
