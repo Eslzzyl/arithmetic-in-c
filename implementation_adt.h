@@ -34,8 +34,17 @@ struct stack_double_node
  */
 struct queue_node
 {
-    double Element;
+    DataType Element;
     PtrToQueueNode Next;
+};
+
+/**
+ * double队列的节点
+ */
+struct queue_double_node
+{
+    double Element;
+    PtrToQueueDoubleNode Next;
 };
 
 /**
@@ -193,7 +202,7 @@ Queue CreateQueue(void)
 {
     Queue Q;
 
-    Q = malloc(sizeof(struct stack_node));
+    Q = malloc(sizeof(struct queue_node));
     if (Q == NULL)
         FatalError("Out of space!");
     Q -> Next = NULL;
@@ -208,20 +217,20 @@ Queue CreateQueue(void)
 void MakeQueueEmpty(Queue Q)
 {
     if (Q == NULL)
-        FatalError("Must use CreateStack first");
+        FatalError("Must use CreateQueue first");
     else
         while (!IsQueueEmpty(Q))
             Dequeue(Q);
 }
 /**
  * 将数据加入队列
- * @param double X
+ * @param Datatype X
  * @param Queue Q
  */
-void Enqueue(double X, Queue Q)
+void Enqueue(DataType X, Queue Q)
 {
     PtrToQueueNode TmpCell;
-    TmpCell = malloc(sizeof(struct stack_node));
+    TmpCell = malloc(sizeof(struct queue_node));
     if (TmpCell == NULL)
         FatalError("Out of space!");
     else
@@ -237,13 +246,20 @@ void Enqueue(double X, Queue Q)
  * @param Queue Q
  * @return double Element
  */
-double Dequeue(Queue Q)
+DataType Dequeue(Queue Q)
 {
-    double Temp;
-    while (Q -> Next != NULL)           //一直查找到队列尾部
-        Q = Q -> Next;
-    Temp = Q -> Element;
-    free(Q);
+    PtrToQueueNode LastCell;
+    DataType Temp;
+
+    if (IsQueueEmpty(Q))
+        FatalError("Empty Queue!");
+    else
+        while (Q -> Next -> Next != NULL)           //一直查找到队列尾部
+            Q = Q -> Next;
+    LastCell = Q -> Next;
+    Temp = LastCell -> Element;
+    free(LastCell);
+    Q -> Next = NULL;
     return Temp;
 }
 
@@ -255,6 +271,99 @@ double Dequeue(Queue Q)
 _Bool IsQueueEmpty(Queue Q)
 {
     return Q -> Next == NULL;
+}
+
+DataType TailOfQueue(Queue Q)
+{
+    while (Q -> Next != NULL)           //一直查找到队列尾部
+        Q = Q -> Next;
+    return Q -> Element;
+}
+
+/**
+ * 创建一个队列
+ * @return Queue
+ */
+Doublequeue CreateDoubleQueue(void)
+{
+    Doublequeue DQ;
+
+    DQ = malloc(sizeof(struct queue_double_node));
+    if (DQ == NULL)
+        FatalError("Out of space!");
+    DQ -> Next = NULL;
+    MakeDoubleQueueEmpty(DQ);
+    return DQ;
+}
+
+/**
+ * 将一个队列置空
+ * @param Queue Q
+ */
+void MakeDoubleQueueEmpty(Doublequeue DQ)
+{
+    if (DQ == NULL)
+        FatalError("Must use CreateStack first");
+    else
+        while (!IsDoubleQueueEmpty(DQ))
+            DeDoublequeue(DQ);
+}
+/**
+ * 将数据加入队列
+ * @param double X
+ * @param Queue Q
+ */
+void EnDoublequeue(double X, Doublequeue DQ)
+{
+    PtrToQueueDoubleNode TmpCell;
+    TmpCell = malloc(sizeof(struct queue_double_node));
+    if (TmpCell == NULL)
+        FatalError("Out of space!");
+    else
+    {
+        TmpCell -> Element = X;
+        TmpCell -> Next = DQ -> Next;
+        DQ -> Next = TmpCell;
+    }
+}
+
+/**
+ * 返回队列尾部元素
+ * @param Queue Q
+ * @return double Element
+ */
+double DeDoublequeue(Doublequeue DQ)
+{
+    double Temp;
+    PtrToQueueDoubleNode LastCell;
+
+    if (IsDoubleQueueEmpty(DQ))
+        FatalError("Empty Doublequeue!");
+    else
+        while (DQ -> Next -> Next != NULL)           //一直查找到队列尾部
+            DQ = DQ -> Next;
+    LastCell = DQ -> Next;
+    Temp = LastCell -> Element;
+    free(LastCell);
+    DQ -> Next = NULL;
+    return Temp;
+}
+
+/**
+ * 检查传入的队列是否为空
+ * @param Queue S
+ * @return 如果为空，返回1；如果不为空，返回0。
+ */
+_Bool IsDoubleQueueEmpty(Doublequeue DQ)
+{
+    return DQ -> Next == NULL;
+}
+
+double TailOfDoubleQueue(Doublequeue DQ)
+{
+    while (DQ -> Next != NULL)           //一直查找到队列尾部
+        DQ = DQ -> Next;
+    return DQ -> Element;
 }
 
 #endif //ARITHMETIC_IMPLEMENTATION_ADT_H

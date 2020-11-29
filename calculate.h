@@ -17,38 +17,38 @@ double Calculate(char *str)
     double a, b;
     str = DeleteSpace_Tab(str);
 
-    Stack s1 = CreateStack();
-    DoubleStack s2 = CreateDoubleStack();
-    Queue q = CreateQueue();
-    if (InfixToPostfix(s1, q, str) == 0)         //isValid为false，返回0.0
+    DoubleStack s = CreateDoubleStack();
+    Queue q = CreateQueue();                         //队列q，用于存储后缀形式的枚举队列
+    Doublequeue dq = CreateDoubleQueue();
+    if (InfixToPostfix(q, dq, str) == 0)         //isValid为false，返回0.0
         return 0.0;
 
-    while (!IsStackEmpty(s1))
+    while (!IsQueueEmpty(q))
     {
-        if (Top(s1) == DOUBLE)
-            PushDoubleStack(Dequeue(q), s2);
-        else if (Top(s1) == ADD){
-            a = PopDoubleStack(s2);
-            b = PopDoubleStack(s2);
-            PushDoubleStack(a + b, s2);
+        if (TailOfQueue(q) == DOUBLE)
+            PushDoubleStack(DeDoublequeue(dq), s);
+        else if (TailOfQueue(q) == ADD){
+            a = PopDoubleStack(s);
+            b = PopDoubleStack(s);
+            PushDoubleStack(a + b, s);
         }
-        else if (Top(s1) == MINUS){
-            a = PopDoubleStack(s2);
-            b = PopDoubleStack(s2);
-            PushDoubleStack(a - b, s2);
+        else if (TailOfQueue(q) == MINUS){
+            a = PopDoubleStack(s);
+            b = PopDoubleStack(s);
+            PushDoubleStack(a - b, s);
         }
-        else if (Top(s1) == MULTIPLY){
-            a = PopDoubleStack(s2);
-            b = PopDoubleStack(s2);
-            PushDoubleStack(a * b, s2);
+        else if (TailOfQueue(q) == MULTIPLY){
+            a = PopDoubleStack(s);
+            b = PopDoubleStack(s);
+            PushDoubleStack(a * b, s);
         }
-        else if (Top(s1) == DIVIDE){
-            a = PopDoubleStack(s2);
-            b = PopDoubleStack(s2);
-            PushDoubleStack(a / b, s2);
+        else if (TailOfQueue(q) == DIVIDE){
+            a = PopDoubleStack(s);
+            b = PopDoubleStack(s);
+            PushDoubleStack(a / b, s);
         }
-        Pop(s1);
+        Dequeue(q);
     }
-    return PopDoubleStack(s2);
+    return PopDoubleStack(s);
 }
 #endif //ARITHMETIC_CALCULATE_H
