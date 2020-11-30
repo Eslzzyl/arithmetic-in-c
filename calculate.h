@@ -6,13 +6,14 @@
 #define ARITHMETIC_CALCULATE_H
 
 #include "infix_to_postfix.h"
+#include <math.h>
 
 /**
  * 执行计算过程的核心函数
  * @param const char *str
  * @return double result
  */
-double Calculate(char *str)
+_Bool Calculate(char *str, double *result)          //返回值标记计算是否成功，0为成功，1为失败
 {
     double a, b;
     str = DeleteSpace_Tab(str);
@@ -21,7 +22,7 @@ double Calculate(char *str)
     Queue q = CreateQueue();                         //队列q，用于存储后缀形式的枚举队列
     Doublequeue dq = CreateDoubleQueue();
     if (InfixToPostfix(q, dq, str) == 0)         //isValid为false，返回0.0
-        return 0.0;
+        return 1;
 
     while (!IsQueueEmpty(q))
     {
@@ -45,10 +46,15 @@ double Calculate(char *str)
         else if (TailOfQueue(q) == DIVIDE){
             a = PopDoubleStack(s);
             b = PopDoubleStack(s);
+            if (fabs(a - 0) < 1e-10){
+                printf("Error: %lf was divided by zero!\n", b);
+                return 1;
+            }
             PushDoubleStack(b / a, s);
         }
         Dequeue(q);
     }
-    return PopDoubleStack(s);
+    *result = PopDoubleStack(s);
+    return 0;
 }
 #endif //ARITHMETIC_CALCULATE_H

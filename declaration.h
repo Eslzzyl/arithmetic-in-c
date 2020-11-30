@@ -29,9 +29,9 @@ typedef struct token Token;
 void FatalError(const char *);
 char *DeleteSpace_Tab(char *);
 char *GetFormula(char *, int, enum read_mode);
-Token Tokenize(const char *);
+void Tokenize(const char *, Token*);
 _Bool InfixToPostfix(Queue, Doublequeue, const char *);
-double Calculate(char *);
+_Bool Calculate(char *, double *);
 
 //枚举堆栈ADT
 Stack CreateStack(void);            //创建栈

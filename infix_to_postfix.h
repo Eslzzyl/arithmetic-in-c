@@ -16,7 +16,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
 
     for (;;)                            //第一轮循环，将字符串转换成中缀式
     {
-        token = Tokenize(string);
+        Tokenize(string, &token);
         if (token.isvalid == 0){
             isValid = 0;
             return isValid;
@@ -33,7 +33,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
             EnDoublequeue(token.data, dq);
         }
     }
-    Tokenize(NULL);
+    Tokenize(NULL, &token);
 
     for (;;)                              //第二轮循环，将中缀式转换成后缀式
     {
