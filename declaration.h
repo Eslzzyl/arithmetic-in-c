@@ -55,6 +55,7 @@ void Enqueue(DataType, Queue);        //入队
 DataType Dequeue(Queue);              //出队
 _Bool IsQueueEmpty(Queue);            //检查队列是否为空
 DataType TailOfQueue(Queue);
+DataType HeadOfQueue(Queue);
 
 //double队列ADT
 Doublequeue CreateDoubleQueue(void);            //创建队列

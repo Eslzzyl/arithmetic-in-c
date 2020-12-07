@@ -22,7 +22,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
             return isValid;
         }
         else if (token.mode == END){
-            if (TailOfQueue(q2) != DOUBLE && TailOfQueue(q2) != RIGHT_PARENTHESES){     //若字符串并非以数字或右括号结尾，则报错
+            if (HeadOfQueue(q2) != DOUBLE && HeadOfQueue(q2) != RIGHT_PARENTHESES){     //若字符串并非以数字或右括号开头，则报错
                 isValid = 0;
                 return isValid;
             }
@@ -48,6 +48,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
                 Push(ADD, s2);
             } else if (Top(s2) != LEFT_PARENTHESES){
                 Enqueue(Top(s2), q1);
+                Pop(s2);
                 Push(ADD, s2);
             }
         }
@@ -56,6 +57,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
                 Push(MINUS, s2);
             } else if (Top(s2) != LEFT_PARENTHESES){
                 Enqueue(Top(s2), q1);
+                Pop(s2);
                 Push(MINUS, s2);
             }
         }

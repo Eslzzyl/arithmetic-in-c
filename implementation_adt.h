@@ -227,7 +227,7 @@ void MakeQueueEmpty(Queue Q)
  * @param Datatype X
  * @param Queue Q
  */
-void Enqueue(DataType X, Queue Q)
+void Enqueue(DataType X, Queue Q)       //入队：从头部进入
 {
     PtrToQueueNode TmpCell;
     TmpCell = malloc(sizeof(struct queue_node));
@@ -246,7 +246,7 @@ void Enqueue(DataType X, Queue Q)
  * @param Queue Q
  * @return double Element
  */
-DataType Dequeue(Queue Q)
+DataType Dequeue(Queue Q)               //出队：从尾部离开
 {
     PtrToQueueNode LastCell;
     DataType Temp;
@@ -278,6 +278,11 @@ DataType TailOfQueue(Queue Q)
     while (Q -> Next != NULL)           //一直查找到队列尾部
         Q = Q -> Next;
     return Q -> Element;
+}
+
+DataType HeadOfQueue(Queue Q)
+{
+    return Q -> Next -> Element;
 }
 
 /**

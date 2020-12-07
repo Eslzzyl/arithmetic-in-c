@@ -5,7 +5,7 @@
 #ifndef ARITHMETIC_IMPLEMENTATION_H
 #define ARITHMETIC_IMPLEMENTATION_H
 
-#define STRING_LENGTH 100
+#define STRING_LENGTH 200
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,14 +84,19 @@ char *GetFormula(char *fileSource, int argc, enum read_mode mode)
             if (fp == NULL)
                 FatalError("Couldn't find file!\n");
         }
-        char *iseof = fgets(string, STRING_LENGTH, fp); //从文件读入算式。如果遇到文件尾，fgets()返回NULL，用变量iseof接收。
-        if (iseof == NULL)
+        while (1)
         {
-            if (argc == 2)
-                exit(0);
-            return NULL;
+            char *iseof = fgets(string, STRING_LENGTH, fp); //从文件读入算式。如果遇到文件尾，fgets()返回NULL，用变量iseof接收。
+            if (iseof == NULL){                 //如果遇到文件尾，直接退出
+                if (argc == 2)
+                    exit(0);
+                return NULL;
+            } else if (string[0] == '\n')               //如果读入空行，则继续读取
+                continue;
+            else
+                break;
         }
-        printf("Read\n\t%sfrom file %s.\n", string, fileSource);
+        printf("Read\n\t%s from file %s.\n", string, fileSource);
     }
     else if (mode == CLOSE)                         //关闭文件
         fclose(fp);
