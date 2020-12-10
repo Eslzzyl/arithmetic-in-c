@@ -44,18 +44,18 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
         if (operator == DOUBLE)
             Enqueue(DOUBLE, q1);
         else if (operator == ADD){
-            if(IsStackEmpty(s2)){
+            if(IsStackEmpty(s2) || Top(s2) == LEFT_PARENTHESES){
                 Push(ADD, s2);
-            } else if (Top(s2) != LEFT_PARENTHESES){
+            } else {
                 Enqueue(Top(s2), q1);
                 Pop(s2);
                 Push(ADD, s2);
             }
         }
         else if (operator == MINUS){
-            if(IsStackEmpty(s2)){
+            if(IsStackEmpty(s2) || Top(s2) == LEFT_PARENTHESES){
                 Push(MINUS, s2);
-            } else if (Top(s2) != LEFT_PARENTHESES){
+            } else {
                 Enqueue(Top(s2), q1);
                 Pop(s2);
                 Push(MINUS, s2);
