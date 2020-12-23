@@ -364,11 +364,4 @@ _Bool IsDoubleQueueEmpty(Doublequeue DQ)
     return DQ -> Next == NULL;
 }
 
-double TailOfDoubleQueue(Doublequeue DQ)
-{
-    while (DQ -> Next != NULL)           //一直查找到队列尾部
-        DQ = DQ -> Next;
-    return DQ -> Element;
-}
-
 #endif //ARITHMETIC_IMPLEMENTATION_ADT_H

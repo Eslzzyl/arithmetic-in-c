@@ -49,7 +49,7 @@ void Tokenize(const char *str, Token *ptr_to_token)
         ptr_to_token -> mode = RIGHT_PARENTHESES;
     }
     else if ((*p >= '0' && *p <= '9') || *p == '.'){  //数字的情况，兼容小数点
-        char q[STRING_LENGTH], k[STRING_LENGTH];
+        char q[STRING_LENGTH];
         int i = 0;
         _Bool isPointOccured = 0;                   //标记小数点在这个token里是否已经出现
         while ((*p >= '0' && *p <= '9') || *p == '.'){

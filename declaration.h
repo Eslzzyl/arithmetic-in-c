@@ -63,6 +63,5 @@ void MakeDoubleQueueEmpty(Doublequeue);
 void EnDoublequeue(double, Doublequeue);        //入队
 double DeDoublequeue(Doublequeue);              //出队
 _Bool IsDoubleQueueEmpty(Doublequeue);            //检查队列是否为空
-double TailOfDoubleQueue(Doublequeue);
 
 #endif //ARITHMETIC_DECLARATION_H

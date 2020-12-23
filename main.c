@@ -1,7 +1,7 @@
 /**
  * 项目 arithmetic 入口
  * 执行标准 C99
- * 编译器 GCC 8.1.0 on CLion
+ * 编译器 GCC 8.1.0
  * 参考文献
  * Data Structures and Algorithm Analysis in C 2nd Edition by Mark Allen Weiss
  */
