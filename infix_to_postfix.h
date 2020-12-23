@@ -14,14 +14,17 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
     _Bool isValid = 1;
     DataType operator;
 
+    unsigned int Position = 0;          //标记Tokenize()的执行位置
+
     for (;;)                            //第一轮循环，将字符串转换成中缀式
     {
-        Tokenize(string, &token);
+        Tokenize(string, &token, &Position);
         if (token.isvalid == 0){
             isValid = 0;
             return isValid;
         }
         else if (token.mode == END){
+            Position = 0;
             if (HeadOfQueue(q2) != DOUBLE && HeadOfQueue(q2) != RIGHT_PARENTHESES){     //若字符串并非以数字或右括号开头，则报错
                 isValid = 0;
                 return isValid;
@@ -33,7 +36,7 @@ _Bool InfixToPostfix(Queue q1, Doublequeue dq, const char *string)
             EnDoublequeue(token.data, dq);
         }
     }
-    Tokenize(NULL, &token);
+    Position = 0;
 
     for (;;)                              //第二轮循环，将中缀式转换成后缀式
     {

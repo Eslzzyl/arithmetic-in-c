@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "declaration.h"
 
 enum datatype{                          //Tokenize()返回的结构体中包含的枚举，标记操作模式
