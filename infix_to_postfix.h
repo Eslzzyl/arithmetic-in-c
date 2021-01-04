@@ -41,9 +41,9 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
             break;
         operator = TailOfQueue(q2);             //取token
         Dequeue(q2);
-        if (operator == DOUBLE)
+        if (operator == DOUBLE)                 //如果是DOUBLE数据，直接入队
             Enqueue(DOUBLE, postfix_queue);
-        else if (operator == ADD) {
+        else if (operator == ADD) {             //加
             if (IsStackEmpty(s2) || Top(s2) == LEFT_PARENTHESES) {
                 Push(ADD, s2);
             } else {
@@ -53,7 +53,7 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
                 }
                 Push(ADD, s2);
             }
-        } else if (operator == MINUS) {
+        } else if (operator == MINUS) {         //减
             if (IsStackEmpty(s2) || Top(s2) == LEFT_PARENTHESES) {
                 Push(MINUS, s2);
             } else {
@@ -63,9 +63,9 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
                 }
                 Push(MINUS, s2);
             }
-        } else if (operator == LEFT_PARENTHESES)
+        } else if (operator == LEFT_PARENTHESES)    //左括号
             Push(LEFT_PARENTHESES, s2);
-        else if (operator == MULTIPLY) {
+        else if (operator == MULTIPLY) {        //乘
             if (IsStackEmpty(s2) || Top(s2) == ADD || Top(s2) == MINUS || Top(s2) == LEFT_PARENTHESES)
                 Push(MULTIPLY, s2);
             else {
@@ -75,7 +75,7 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
                 }
                 Push(MULTIPLY, s2);
             }
-        } else if (operator == DIVIDE) {
+        } else if (operator == DIVIDE) {        //除
             if (IsStackEmpty(s2) || Top(s2) == ADD || Top(s2) == MINUS || Top(s2) == LEFT_PARENTHESES)
                 Push(DIVIDE, s2);
             else {
@@ -85,7 +85,7 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
                 }
                 Push(DIVIDE, s2);
             }
-        } else if (operator == CLOSING_PARENTHESES) {
+        } else if (operator == CLOSING_PARENTHESES) {   //右括号
             while (Top(s2) != LEFT_PARENTHESES) {
                 Enqueue(Top(s2), postfix_queue);
                 Pop(s2);
@@ -93,7 +93,7 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
             Pop(s2);                //弹出左小括号
         }
     }
-    while (!IsStackEmpty(s2)) {
+    while (!IsStackEmpty(s2)) {     //将s2的内容全部转入postfix_queue
         Enqueue(Top(s2), postfix_queue);
         Pop(s2);
     }

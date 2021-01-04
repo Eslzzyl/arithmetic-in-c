@@ -103,8 +103,7 @@ void Tokenize(const char *formula, Token *ptr_to_token, unsigned int *position)
             } else if (*(formula + *position) == ')') {
                 ParenthesesLevel--;
                 if (ParenthesesLevel == -1) {
-                    if (*(formula + *position - 1) != ')' && *(formula + *position) < '0'
-                        && *(formula + *position) > '9') {
+                    if (*(formula + *position - 1) != ')' && *(formula + *position) < '0' && *(formula + *position) > '9') {
                         Error("Invalid formula: operand formula ends with an invalid token.\n");
                         ptr_to_token->isvalid = 0;
                         return;
@@ -178,8 +177,7 @@ void Tokenize(const char *formula, Token *ptr_to_token, unsigned int *position)
             } else if (*(formula + *position) == ')') {
                 ParenthesesLevel--;
                 if (ParenthesesLevel == -1) {
-                    if (*(formula + *position - 1) != ')' && *(formula + *position) < '0'
-                                                               && *(formula + *position) > '9') {
+                    if (*(formula + *position - 1) != ')' && *(formula + *position) < '0' && *(formula + *position) > '9') {
                         Error("Invalid formula: operand formula ends with an invalid token.\n");
                         ptr_to_token->isvalid = 0;
                         return;

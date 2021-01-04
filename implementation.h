@@ -14,7 +14,7 @@
 #include "declaration.h"
 
 enum datatype
-{                          //Tokenize()返回的结构体中包含的枚举，标记操作模式
+{                                       //Tokenize()返回的结构体中包含的枚举，标记操作模式
     ADD, MINUS, MULTIPLY, DIVIDE, LEFT_PARENTHESES, CLOSING_PARENTHESES, DOUBLE, END,
 };
 
@@ -107,6 +107,11 @@ char *GetFormula(char *file_source, int argc, _Bool mode)
     return string;                                              //返回读到的字符串
 }
 
+/**
+ * 检查括号是否平衡
+ * @param const char *formula
+ * @return isBalanced
+ */
 _Bool BalanceParenthesis(const char *formula)
 {
     Stack s = CreateStack();

@@ -7,9 +7,6 @@
 
 #include "implementation.h"
 #include "declaration.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /**
  * 枚举堆栈的节点
@@ -57,7 +54,7 @@ Stack CreateStack(void)
 
     S = malloc(sizeof(struct stack_node));
     if (S == NULL)
-        FatalError("Out of Space!");
+        FatalError("Out of space when creating a stack.\n");
     S->Next = NULL;
     MakeStackEmpty(S);
     return S;
@@ -70,7 +67,7 @@ Stack CreateStack(void)
 void MakeStackEmpty(Stack S)
 {
     if (S == NULL)
-        FatalError("Must use CreateStack first");
+        FatalError("Stack is empty. Please use CreateStack() first.\n");
     else
         while (!IsStackEmpty(S))
             Pop(S);
@@ -87,7 +84,7 @@ inline void Push(DataType X, Stack S)
 
     TmpCell = malloc(sizeof(struct stack_node));      //为新节点分配内存
     if (TmpCell == NULL)
-        FatalError("Out of space!");
+        FatalError("Out of space when pushing an element into stack.\n");
     else {
         TmpCell->Element = X;
         TmpCell->Next = S->Next;            //在栈顶压入X，注意栈顶在栈的头部
@@ -104,8 +101,8 @@ inline DataType Top(Stack S)
 {
     if (!IsStackEmpty(S))
         return S->Next->Element;
-    FatalError("Empty Stack!");
-    return 0;       //此处的return用于规避编译警告
+    FatalError("The stack is empty.\n");
+    return 0;                               //此处的return用于规避编译警告
 }
 
 /**
@@ -117,7 +114,7 @@ inline void Pop(Stack S)
     PtrToStackNode FirstCell;
 
     if (IsStackEmpty(S))
-        FatalError("Empty Stack!");
+        FatalError("The stack is empty.\n");
     else {
         FirstCell = S->Next;
         S->Next = S->Next->Next;
@@ -141,7 +138,7 @@ DoubleStack CreateDoubleStack(void)
 
     DS = malloc(sizeof(struct stack_double_node));
     if (DS == NULL)
-        FatalError("Out of space!");
+        FatalError("Out of space when creating a double stack.\n");
     DS->Next = NULL;
     MakeDoubleStackEmpty(DS);
     return DS;
@@ -161,7 +158,7 @@ inline void PushDoubleStack(double X, DoubleStack DS)
     PtrToStackDoubleNode TmpCell;
     TmpCell = malloc(sizeof(struct stack_double_node));
     if (TmpCell == NULL)
-        FatalError("Out of space!");
+        FatalError("Out of space when pushing an element into the double stack.\n");
     else {
         TmpCell->Element = X;
         TmpCell->Next = DS->Next;

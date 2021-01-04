@@ -37,16 +37,16 @@ _Bool Calculate(char *formula, double *result)                      //返回值�
             else if (TailOfQueue(postfix_queue) == MULTIPLY)        //乘
                 PushDoubleStack(b * a, double_stack);
             else if (TailOfQueue(postfix_queue) == DIVIDE) {        //除
-                if (fabs(a) < 1e-6) {
+                if (fabs(a) < 1e-6) {                               //检测除数为零的情况
                     Error("Divide by zero!");
                     return 0;
                 }
                 PushDoubleStack(b / a, double_stack);
             }
         }
-        Dequeue(postfix_queue);
+        Dequeue(postfix_queue);                                     //使最后一个元素离队
     }
-    *result = PopDoubleStack(double_stack);         //写入结果
+    *result = PopDoubleStack(double_stack);                         //写入结果
     free(double_stack);
     free(postfix_queue);
     return 1;
