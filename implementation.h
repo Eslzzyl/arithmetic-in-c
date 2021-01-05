@@ -119,8 +119,11 @@ _Bool BalanceParenthesis(const char *formula)
     for (i = 0; formula[i] != '\0'; ++i) {
         if (formula[i] == '(')
             Push(LEFT_PARENTHESES, s);
-        else if (formula[i] == ')')
+        else if (formula[i] == ')') {
+            if (IsStackEmpty(s))
+                return 0;
             Pop(s);
+        }
     }
     if (IsStackEmpty(s))                                        //如果括号不平衡，返回0
         return 1;

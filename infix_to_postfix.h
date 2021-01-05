@@ -25,7 +25,8 @@ _Bool InfixToPostfix(Queue postfix_queue, Doublequeue double_queue, const char *
             return 0;
         } else if (token.mode == END) {
             position = 0;
-            if (HeadOfQueue(q2) != DOUBLE && HeadOfQueue(q2) != CLOSING_PARENTHESES) {     //若字符串并非以数字或右括号开头，则报错
+            if (HeadOfQueue(q2) != DOUBLE && HeadOfQueue(q2) != CLOSING_PARENTHESES) {     //若字符串并非以数字或右括号结束，则报错
+                Error("Invalid formula: The formula does not end with a number or closing parenthesis.\n");
                 return 0;
             }
             break;

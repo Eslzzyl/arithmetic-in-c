@@ -199,7 +199,7 @@ void Tokenize(const char *formula, Token *ptr_to_token, unsigned int *position)
         }
         ptr_to_token->data = sqrt(ptr_to_token->data);          //调用库函数进行开平方运算
     } else {                                                    //若前面几种情况均未匹配到，视为未定义的表达式，报错
-        Error("Invalid formula: undefined token.\n");
+        printf("Error: Undefined token: %c\n\n", *(formula + *position));
         ptr_to_token->isvalid = 0;
         return;
     }

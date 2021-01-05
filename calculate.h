@@ -22,7 +22,10 @@ _Bool Calculate(char *formula, double *result)                      //返回值�
     Doublequeue double_Queue = CreateDoubleQueue();                 //队列dq，用于存储运算数据
     if (InfixToPostfix(postfix_queue, double_Queue, formula) == 0)  //isValid为false，返回0，表示运算不合法
         return 0;
-
+    if (IsQueueEmpty(postfix_queue)){
+        Error("Empty formula.\n");
+        return 0;
+    }
     while (!IsQueueEmpty(postfix_queue))                            //只要q不为空，就持续循环
     {
         if (TailOfQueue(postfix_queue) == DOUBLE)
